@@ -32,8 +32,6 @@ CONFIG_SHELL_OPTIONS=(
 )
 
 CONFIG_PASSENGER_OPTIONS=(
-  address
-  port
   socket
   environment
   max-pool-size
