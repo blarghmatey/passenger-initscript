@@ -28,6 +28,7 @@ CONFIG_FILE_EXT=".yml"
 CONFIG_SHELL_OPTIONS=(
   rvm
   cwd
+  rvm-path
 )
 
 CONFIG_PASSENGER_OPTIONS=(
@@ -44,7 +45,6 @@ CONFIG_PASSENGER_OPTIONS=(
   pid-file
   nginx-bin
   nginx-version
-  rvm-path
 )
 
 CONFIG_OPTIONS=( "${CONFIG_SHELL_OPTIONS[@]}" "${CONFIG_PASSENGER_OPTIONS[@]}")
