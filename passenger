@@ -43,6 +43,9 @@ CONFIG_PASSENGER_OPTIONS=(
   pid-file
   nginx-bin
   nginx-version
+  ssl
+  ssl-certificate
+  ssl-certificate-key
 )
 
 CONFIG_OPTIONS=( "${CONFIG_SHELL_OPTIONS[@]}" "${CONFIG_PASSENGER_OPTIONS[@]}")
@@ -147,6 +150,9 @@ passenger_ctl() {
   get_passenger_options $command
 
   local options="$_RETURN"
+  if [ $config_user ]; then
+    export PATH=`su $config_user -c 'echo $PATH'`:$PATH
+  fi
 
   if [ -z "$config_rvm" ]; then
     argv="$PASSENGER_SYSTEM_BIN $command $options"
