@@ -44,6 +44,7 @@ CONFIG_PASSENGER_OPTIONS=(
   pid-file
   nginx-bin
   nginx-version
+  rvm_path
 )
 
 CONFIG_OPTIONS=( "${CONFIG_SHELL_OPTIONS[@]}" "${CONFIG_PASSENGER_OPTIONS[@]}")
@@ -152,7 +153,11 @@ passenger_ctl() {
   if [ -z "$config_rvm" ]; then
     argv="$PASSENGER_SYSTEM_BIN $command $options"
   else
-    argv="rvm_path=$RVM_PATH $RVM_SHELL $config_rvm -c '$PASSENGER_RVM_BIN $command $options'"
+    if [ -z $config_rvm_path ]; then
+      argv="rvm_path=$RVM_PATH $RVM_SHELL $config_rvm -c '$PASSENGER_RVM_BIN $command $options'"
+    else
+      argv="rvm_path=$config_rvm_path $RVM_SHELL $config_rvm -c '$PASSENGER_RVM_BIN $command $options'"
+    fi
   fi
 
   [ -n "$DEBUG" ] && echo $argv
